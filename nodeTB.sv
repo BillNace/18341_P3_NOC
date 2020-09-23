@@ -189,7 +189,15 @@ module tb(
 
     $display("Checking single packet node->router");
     send_node(32'h12345678);
-    wait_for_quiescence(6);
+    
+	  @(posedge clock);
+	  free_node_router <= 1;
+    assert(put_node_router === 1'b0)
+    else begin $error("put_outbound is %b immediately after sending a packet to node, data needs to be stored in fifo for one cycle before continuing", put_node_router); errors++; end
+	  @(posedge clock);
+    assert(put_node_router === 0)
+    else begin $error("put_outbound is %b immediately after sending a packet to node, data needs to be stored in fifo for one cycle before continuing", put_node_router); errors++; end
+    wait_for_quiescence(4);
 
     $display("Checking FIFO length");
     send_node(32'h12345678);
