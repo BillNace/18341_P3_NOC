@@ -164,7 +164,7 @@ module automatic RouterTB (
 
         if (debug_level > 1) begin
           $info({"Monitor%0d detected user packet ",
-                 "{src: %0d, dest: %d0, data: %h} ",
+                 "{src: %0d, dest: %0d, data: %h} ",
                  "corresponding to mailbox entry ",
                  "{src: %d, dest: %d, data: %h} ",
                  "created @%0t, sent @%0t and received @%0t"},
