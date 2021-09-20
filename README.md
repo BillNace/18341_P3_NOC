@@ -1,6 +1,6 @@
 # Network on a Chip Project
 
-18-341: Fall Semester of 2020
+18-341: Fall Semester of 2021
 
 ## Objective and Overview
 
@@ -14,10 +14,10 @@ This is an **individual** project.
 
 Project value | 100 points
 --- | ---
-Project start | 23 Sep 2020
-Part 1 due | 5 Oct 2020 at 1:30pm
-Project due | 19 Oct 2020 at 1:30pm
-Drop dead date | 20 Oct 2020 at 1:30pm
+Project start | 20 Sep 2021
+Part 1 due | 4 Oct 2021 at 1:30pm
+Project due | 11 Oct 2021 at 1:30pm
+Drop dead date | 12 Oct 2021 at 1:30pm
 
 Remember!  You must have uploaded something by the drop-dead date!  *You must
 attempt every project*.
