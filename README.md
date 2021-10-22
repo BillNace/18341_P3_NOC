@@ -84,7 +84,7 @@ There are two parts to the assignment with due dates as shown above.
 * In part 1, you will design and write the SV code for a Node. We will
   provide a testbench to mimic a component sending messages into the network
   through the node, and we will provide a testbench to mimic a Router sending
-  message out to the node from the network.
+  message out to the node from the network.  **Beware:** The Node testbench is not comprehensive.  Just because your code passes these tests doesn't mean it is a perfectly designed and perfectly implemented Node.
 
 * In part 2, you will design and write the SV code for the Router and
   implement the whole system shown above. We will provide testbenches that
