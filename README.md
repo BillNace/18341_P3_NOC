@@ -299,6 +299,11 @@ Things to consider:
 * Besides having a bunch of concurrently active FSMs working in a
   hopefully coordinated fashion, the trickiest part of this will be the routing
   logic in the router that exhibits fairness and concurrency.
+  
+* You are limited in the total space available for you in the router (otherwise
+  you could cover up a poor design with a really long queue).  You may have 
+  space for 32 packets in the router, in addition to any registers used to
+  slice up and send the IN/OUT packets.
 
 The whole idea here is to design a router that transfers all packets sent into
 it: it doesn’t lose any.  Then consider making it fast.  And then make sure it’s
