@@ -305,7 +305,10 @@ it: it doesn’t lose any.  Then consider making it fast.  And then make sure it
 fair.  If our TBs send 10K packets into the system, 10K packets better come out
 at the correct destination nodes!  Of course, it’s better if it’s fast and fair.
 This part is a design project; there are many ways to implement this, including
-internal queues in the router, etc.
+internal queues in the router, etc. One note is that if you decide to use internal 
+queues in your router you are allowed up to a **grand total of 32 queue slots** per router (not including
+the registers that actively send and recieve data from the other routers and nodes).
+For example this means that you may have eight four element long queues in your router.
 
 ## Some SV Things
 
