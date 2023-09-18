@@ -61,3 +61,6 @@ session.inter.vpd.tcl
 simv
 *.ver
 mat*_gen.mif
+
+# Macintosh junk
+.DS_Store
