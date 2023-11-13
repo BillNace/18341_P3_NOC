@@ -50,15 +50,15 @@ module automatic RouterTB (
   output pkt_t pkt_in[`NODES],
   output logic pkt_in_avail[`NODES]);
 
-  function logic are_close (integer a, b, c, real tol=0.1);
+  function logic are_close (integer a, b, c=-1, real tol=0.1);
     if ((1.0-tol) * b > a || a > (1.0+tol) * b) return 1'b0;
-    if ((1.0-tol) * c > a || a > (1.0+tol) * c) return 1'b0;
+    if (c != -1 && ((1.0-tol) * c > a || a > (1.0+tol) * c)) return 1'b0;
 
     if ((1.0-tol) * a > b || b > (1.0+tol) * a) return 1'b0;
-    if ((1.0-tol) * c > b || b > (1.0+tol) * c) return 1'b0;
+    if (c != -1 && ((1.0-tol) * c > b || b > (1.0+tol) * c)) return 1'b0;
 
-    if ((1.0-tol) * a > c || c > (1.0+tol) * a) return 1'b0;
-  if ((1.0-tol) * b > c || c > (1.0+tol) * b) return 1'b0;
+    if (c != -1 && ((1.0-tol) * a > c || c > (1.0+tol) * a)) return 1'b0;
+    if (c != -1 && ((1.0-tol) * b > c || c > (1.0+tol) * b)) return 1'b0;
 
     return 1'b1;
   endfunction
@@ -268,6 +268,7 @@ module automatic RouterTB (
   initial begin
     PktWrapper tmp_1, tmp_2, tmp_3;
     integer fair_first[6]; // FAIRNESS
+    integer combos[4][3];  // FAIRNESS
     integer cycle_count = 0; // PERFORMANCE
 
     pkt_in = '{default: '0}; // `NULL_PKT placeholder
@@ -468,74 +469,106 @@ module automatic RouterTB (
       do_reset;
       ##1 ;
 
+      combos = '{'{3, 4, -1}, '{3, 5, -1}, '{4, 5, -1}, '{3, 4, 5}};
       $display("Checking fairness in router 1");
-      for (int dest=0; dest < 3; dest++) begin
-        automatic int fork_dest = dest;
-        $display("\nFairness destination is **%0d** in router 1", fork_dest);
-        fair_first = '{0, 0, 0, 0, 0, 0};
+      for (int combo_type=0; combo_type < 4; combo_type++) begin
+        $display("\nFairness sources are **%0d, %0d, %0d** in router 1", combos[combo_type][0], combos[combo_type][1], combos[combo_type][2]);
+        for (int dest=0; dest < 3; dest++) begin
+          automatic int fork_dest = dest;
+          $display("\nFairness destination is **%0d** in router 1", fork_dest);
+          fair_first = '{0, 0, 0, 0, 0, 0};
 
-        for (int i=0; i < `NUM_FAIRNESS; i++) begin
-          fork
-            begin
-              send_pkt(3, fork_dest, 1'b0);
-            end
+          for (int i=0; i < `NUM_FAIRNESS; i++) begin
+            fork
+              begin
+                send_pkt(combos[combo_type][0], fork_dest, 1'b0);
+              end
 
-            begin
-              send_pkt(4, fork_dest, 1'b0);
-            end
+              begin
+                send_pkt(combos[combo_type][1], fork_dest, 1'b0);
+              end
 
-            begin
-              send_pkt(5, fork_dest, 1'b0);
-            end
-          join
+              begin
+                if (combos[combo_type][2] != -1)
+                  send_pkt(combos[combo_type][2], fork_dest, 1'b0);
+              end
+            join
 
-          recv_M.get(tmp_1);
-          recv_M.get(tmp_2);
-          recv_M.get(tmp_3);
+            recv_M.get(tmp_1);
+            recv_M.get(tmp_2);
+            if (combos[combo_type][2] != -1)
+              recv_M.get(tmp_3);
 
-          fair_first[tmp_1.pkt.src] += 1;
+            fair_first[tmp_1.pkt.src] += 1;
+          end
+
+          // only 2 sources
+          if (combos[combo_type][2] == -1) begin
+            $display("Number of first receipts from source (%d: %d) (%d: %d)",
+                    combos[combo_type][0], fair_first[combos[combo_type][0]],
+                    combos[combo_type][1], fair_first[combos[combo_type][1]]);
+            assert(are_close(fair_first[combos[combo_type][0]], fair_first[combos[combo_type][1]])) else
+              $error("Some packets were received more than others");
+          end else begin
+            $display("Number of first receipts from source (%d: %d) (%d: %d) (%d: %d)",
+                    combos[combo_type][0], fair_first[combos[combo_type][0]],
+                    combos[combo_type][1], fair_first[combos[combo_type][1]],
+                    combos[combo_type][2], fair_first[combos[combo_type][2]]);
+            assert(are_close(fair_first[combos[combo_type][0]], fair_first[combos[combo_type][1]], fair_first[combos[combo_type][2]])) else
+              $error("Some packets were received more than others");
+          end
         end
-
-        $display("Number of first receipts from source (3: %d) (4: %d) (5: %d)",
-                 fair_first[3], fair_first[4], fair_first[5]);
-
-        assert(are_close(fair_first[3], fair_first[4], fair_first[5])) else
-          $error("Some packets were received more than others");
       end
 
+      combos = '{'{0, 1, -1}, '{0, 2, -1}, '{1, 2, -1}, '{0, 1, 2}};
       $display("Checking fairness in router 2");
-      for (int dest=3; dest < 6; dest++) begin
-        automatic int fork_dest = dest;
-        $display("\nFairness destination is **%0d** in router 2", fork_dest);
-        fair_first = '{0, 0, 0, 0, 0, 0};
+      for (int combo_type=0; combo_type < 4; combo_type++) begin
+        $display("\nFairness sources are **%0d, %0d, %0d** in router 2", combos[combo_type][0], combos[combo_type][1], combos[combo_type][2]);
+        for (int dest=3; dest < 6; dest++) begin
+          automatic int fork_dest = dest;
+          $display("\nFairness destination is **%0d** in router 2", fork_dest);
+          fair_first = '{0, 0, 0, 0, 0, 0};
 
-        for (int i=0; i < `NUM_FAIRNESS; i++) begin
-          fork
-            begin
-              send_pkt(0, fork_dest, 1'b0);
-            end
+          for (int i=0; i < `NUM_FAIRNESS; i++) begin
+            fork
+              begin
+                send_pkt(combos[combo_type][0], fork_dest, 1'b0);
+              end
 
-            begin
-              send_pkt(1, fork_dest, 1'b0);
-            end
+              begin
+                send_pkt(combos[combo_type][1], fork_dest, 1'b0);
+              end
 
-            begin
-              send_pkt(2, fork_dest, 1'b0);
-            end
-          join
+              begin
+                if (combos[combo_type][2] != -1)
+                  send_pkt(combos[combo_type][2], fork_dest, 1'b0);
+              end
+            join
 
-          recv_M.get(tmp_1);
-          recv_M.get(tmp_2);
-          recv_M.get(tmp_3);
+            recv_M.get(tmp_1);
+            recv_M.get(tmp_2);
+            if (combos[combo_type][2] != -1)
+              recv_M.get(tmp_3);
 
-          fair_first[tmp_1.pkt.src] += 1;
+            fair_first[tmp_1.pkt.src] += 1;
+          end
+
+          // only 2 sources
+          if (combos[combo_type][2] == -1) begin
+            $display("Number of first receipts from source (%d: %d) (%d: %d)",
+                    combos[combo_type][0], fair_first[combos[combo_type][0]],
+                    combos[combo_type][1], fair_first[combos[combo_type][1]]);
+            assert(are_close(fair_first[combos[combo_type][0]], fair_first[combos[combo_type][1]])) else
+              $error("Some packets were received more than others");
+          end else begin
+            $display("Number of first receipts from source (%d: %d) (%d: %d) (%d: %d)",
+                    combos[combo_type][0], fair_first[combos[combo_type][0]],
+                    combos[combo_type][1], fair_first[combos[combo_type][1]],
+                    combos[combo_type][2], fair_first[combos[combo_type][2]]);
+            assert(are_close(fair_first[combos[combo_type][0]], fair_first[combos[combo_type][1]], fair_first[combos[combo_type][2]])) else
+              $error("Some packets were received more than others");
+          end
         end
-
-        $display("Number of first receipts from source (0: %d) (1: %d) (2: %d)",
-                 fair_first[0], fair_first[1], fair_first[2]);
-
-        assert(are_close(fair_first[0], fair_first[1], fair_first[2])) else
-          $error("Some packets were received more than others");
       end
 
       $display({"\n",
