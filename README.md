@@ -1,6 +1,6 @@
 # Network on a Chip Project
 
-18-341: Fall Semester of 2023
+18-341: Fall Semester of 2024
 
 ## Objective and Overview
 
@@ -14,10 +14,10 @@ This is an **individual** project.
 
 Project value | 100 points
 --- | ---
-Project start | 18 Sep 2023
-Part 1 due | 29 Sep 2023 at 12:30pm
-Project due | 9 Oct 2023 at 12:30pm
-Drop dead date | 10 Oct 2023 at 12:30pm
+Project start | 6 Feb 2024
+Part 1 due | 16 Feb 2024 at 3:30pm
+Project due | 27 Feb 2024 at 3:30pm
+Drop dead date | 28 Feb 2024 at 3:30pm
 
 Remember!  You must have uploaded something by the drop-dead date!  *You must
 attempt every project*.
@@ -470,12 +470,12 @@ feedback.
 Develop your node solution in a file named **Node.sv**.  Tag it with
 "final_part1" and ensure you push your repo to GitHub.
 
-There will be no demo for Part 1.  We will simulate your code and grade the
-output.
+There will be no separate demo for Part 1.  You will demonstrate it to us during
+the Part 2 demo.
 
 ### Part 2
 
-Rename your file to **Node.sv** and use it along with your **Router.sv** to
+Use your **Node.sv** along with your **Router.sv** to
 demonstrate the whole NOC system.  Make sure it works properly with all of the
 provided testbenches.
 
@@ -497,27 +497,27 @@ can impress us with the brilliance of your design.
 
 ## Git Reminders
 
-When you have finished part 1 and part 2 you should tag the release for
-submission and push your repo to GitHub.
+When you have finished part 2 you should tag the release for
+submission, push your repo to GitHub and submit it to Gradescope.
 
-1. Tag the latest commit as "final"
+Here's a reminder of the steps you should follow:
 
-    ```sh
-    $ git tag -a final_part1 -m "Final submission for 18341 NOC Part 1"
-    ```
+1. Do Git stuff:
+  ```sh
+$ git branch gradescope_final
+$ git checkout gradescope_final
+$ git add --all
+$ git commit -m "My final submission.  Wow, that was fun!"
+$ git push -u origin gradescope_final
+$ git tag -a final -m "Final submission for 18341 P3"
+$ git push --tags  
+  ```
 
-2. Check that the tag was created successfully
+2. Log onto Gradescope and select the P3: NOC assignment.
 
-    ```sh
-    $ git tag
-    final
-    ```
+3. Select the repo you want to submit.
 
-3. Push repo to GitHub.
-
-    ```sh
-    $ git push --tags
-    ```
+4. Press submit!
 
 **If you need to alter your submission, remember to delete the tag.**
 
