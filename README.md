@@ -14,10 +14,10 @@ This is an **individual** project.
 
 Project value | 100 points
 --- | ---
-Project start | 6 Feb 2024
-Part 1 due | 16 Feb 2024 at 3:30pm
-Project due | 27 Feb 2024 at 3:30pm
-Drop dead date | 28 Feb 2024 at 3:30pm
+Project start | 17 Sep 2024
+Part 1 due | 27 Sep 2024 at 3:30pm
+Project due | 7 Oct 2024 at 3:30pm
+Drop dead date | 8 Oct 2024 at 3:30pm
 
 Remember!  You must have uploaded something by the drop-dead date!  *You must
 attempt every project*.
@@ -42,7 +42,9 @@ In this project you will build the components required for a very simple
 network-on-chip (NOC).  Networks on chips are used for a communication system
 among lots of different components like processor cores, memories, or special IP
 blocks.  NOCs attempt to be more efficient communication mechanisms than a bus,
-especially in situations where lots of messages are being sent in parallel.
+especially in situations where lots of messages are being among the various
+components, rather than all to/from a bus master.
+
 Each component contains logic that sends and receives messages to/from other
 components.  In a NOC system, the components are each connected to a node.  The
 way to communicate between components is to send a packet of information first
