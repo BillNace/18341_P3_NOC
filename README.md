@@ -1,6 +1,6 @@
 # Network on a Chip Project
 
-18-341: Fall Semester of 2024
+18-341: Spring Semester of 2025
 
 ## Objective and Overview
 
@@ -14,10 +14,10 @@ This is an **individual** project.
 
 Project value | 100 points
 --- | ---
-Project start | 17 Sep 2024
-Part 1 due | 27 Sep 2024 at 3:30pm
-Project due | 7 Oct 2024 at 3:30pm
-Drop dead date | 8 Oct 2024 at 3:30pm
+Project start | 3 February 2025
+Part 1 due | 14 February 2025 at 3:30pm
+Project due | 24 February 2025 at 3:30pm
+Drop dead date | 25 February 2025 at 3:30pm
 
 Remember!  You must have uploaded something by the drop-dead date!  *You must
 attempt every project*.
@@ -498,6 +498,8 @@ FPGA board, your code should be synthesizable.
 
 You will then have a demo, scheduled soon after the deadline, during which you
 can impress us with the brilliance of your design.
+
+Your Part 2 submission should still pass the Part 1 submission.
 
 ## Git Reminders
 
