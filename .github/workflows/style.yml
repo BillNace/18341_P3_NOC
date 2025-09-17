@@ -16,9 +16,9 @@ jobs:
       artifact_name: slang-Linux-gcc-11-release.tar.gz
 
       config_repo: 18-341/project-actions
-      config_ref: main
+      config_ref: master
       config_path: config/.341-slang-tidy
 
-      base_branch: main
+      base_branch: master
       run_full_scan: "false"
       fail_on_no_files: "false"
