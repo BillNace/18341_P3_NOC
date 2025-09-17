@@ -1,6 +1,6 @@
 # Network on a Chip Project
 
-18-341: Spring Semester of 2025
+18-341: Fall Semester of 2025
 
 ## Objective and Overview
 
@@ -14,10 +14,10 @@ This is an **individual** project.
 
 Project value | 100 points
 --- | ---
-Project start | 4 February 2025
-Part 1 due | 14 February 2025 at 3:30pm
-Project due | 25 February 2025 at 3:30pm
-Drop dead date | 26 February 2025 at 3:30pm
+Project start | 15 September 2025
+Part 1 due | 26 September 2025 at 3:30pm
+Project due | 6 October 2025 at 3:30pm
+Drop dead date | 7 October 2025 at 3:30pm
 
 Remember!  You must have uploaded something by the drop-dead date!  *You must
 attempt every project*.
@@ -536,6 +536,39 @@ Locally:
 ```sh
 $ git tag -d final
 ```
+
+## 341 Linter
+
+Your repo will include a "Linter."  That is a tool to inspect your code and provide
+suggestions based on style and common syntax issues.  It is more than the syntax
+checker that VCS employs to check your code. Rather, it can find legal syntax 
+constructs and give you feedback if it thinks there might be the potential for a
+problem.  We have configured the linter to check for style guideline violations as
+well.
+
+We will not be using the linter as an additional way to grade your work.  Rather,
+we have included it here for your own use.  It will provide you some valuable
+feedback, but you are free to ignore it or not use it.
+
+The linter will run every time you push your code to your repo.  If you look on 
+GitHub after it has completed running, you will see a tick or red cross next to your
+commit.  Clicking on it will show the details of the run results.
+
+![Linter failure](./images/Linter1.png "Linter failure")
+
+Clicking on the details tab will provide a longer list of results.
+
+![Linter results](./images/Linter2.png "Linter results")
+
+You can also click on the "Summary" tab on the left to get a short summary of any
+tests you may have failed.  You will also be able to download an artifact, which 
+will give you details on the specific line numbers and test cases you failed.
+
+![Results summary](./images/Linter3.png "Linter results summary")
+
+Again, let me stress that this feedback is entirely for your benefit.  We will not
+be grading with the linter.  Rather, it should help you find style issues, but also
+problems with bit addressing, incomplete connections, etc.
 
 ## Late Penalty
 
