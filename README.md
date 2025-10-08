@@ -539,7 +539,7 @@ $ git tag -d final
 
 ## 341 Linter
 
-Your repo will include a "Linter."  That is a tool to inspect your code and provide
+Your repo will include a "Linter" that will show up on git commits as "Slang/Tidy."  That is a tool to inspect your code and provide
 suggestions based on style and common syntax issues.  It is more than the syntax
 checker that VCS employs to check your code. Rather, it can find legal syntax 
 constructs and give you feedback if it thinks there might be the potential for a
