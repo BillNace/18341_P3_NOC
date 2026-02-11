@@ -472,7 +472,13 @@ feedback.
 ### Part 1
 
 Develop your node solution in a file named **Node.sv**.  Tag it with
-"final_part1" and ensure you push your repo to GitHub.
+"final_part1" and ensure you push your repo to GitHub. 
+ 
+In the **doc/** directory of your repo, you should include any of your design
+documentation.  I will spare you the agony of a formal report, but you must have
+*complete* state transition diagrams for all FSMs and component-level schematics
+for your datapaths.  The TAs will be examining these during the demo and will
+expect your answers to match the diagrams (which should match your code).
 
 There will be no separate demo for Part 1.  You will demonstrate it to us during
 the Part 2 demo.
@@ -483,11 +489,7 @@ Use your **Node.sv** along with your **Router.sv** to
 demonstrate the whole NOC system.  Make sure it works properly with all of the
 provided testbenches.
 
-In the **doc/** directory of your repo, you should include any of your design
-documentation.  I will spare you the agony of a formal report, but you must have
-*complete* state transition diagrams for all FSMs and component-level schematics
-for your datapaths.  The TAs will be examining these during the demo and will
-expect your answers to match the diagrams (which should match your code).
+Make sure you have updated documentation included in the **doc/** directory.
 
 Again, we will simulate your code with our grading testbench and use the output
 to give you some of the grade.
