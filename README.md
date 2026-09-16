@@ -14,10 +14,10 @@ This is an **individual** project.
 
 Project value | 100 points
 --- | ---
-Project start | 3 February 2026
-Part 1 due | 13 February 2026 at 3:30pm
-Project due | 24 February 2026 at 3:30pm
-Drop dead date | 25 February 2026 at 3:30pm
+Project start | 14 September 2026
+Part 1 due | 25 September 2026 at 3:30pm
+Project due | 5 October 2026 at 3:30pm
+Drop dead date | 6 October 2026 at 3:30pm
 
 Remember!  You must have uploaded something by the drop-dead date!  *You must
 attempt every project*.
@@ -464,7 +464,7 @@ use the VCS simulator to grade your design.  Use it to develop your design too.
 caught on one of those.)
 
 This semester we will be using
-[Github Classroom](https://classroom.github.com/classrooms/42654531-18-341-fall-2018)
+[Classroom50](https://classroom50.org/F26-18341/18341/assignments)
 to hand-out as well as hand-in project code. Make sure to commit regularly and
 provide informative messages, as this will help TAs immensely to provide
 feedback.
