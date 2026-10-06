@@ -196,7 +196,7 @@ module tb(
     else begin $error("put_outbound is %b immediately after sending a packet to node, data needs to be stored in fifo for one cycle before continuing", put_node_router); errors++; end
 	  @(posedge clock);
     assert(put_node_router === 0)
-    else begin $error("put_outbound is %b immediately after sending a packet to node, data needs to be stored in fifo for one cycle before continuing", put_node_router); errors++; end
+		else begin $error("put_outbound is %b, which does not meet timing specs of waiting one clock cycle after router is free", put_node_router); errors++; end
     wait_for_quiescence(4);
 
     $display("Checking FIFO length");
